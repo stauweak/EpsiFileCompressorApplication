@@ -5,8 +5,9 @@
 #include "zippedbuffer.h"
 
 
-Writer::Writer(QString directory)
+Writer::Writer(QString directory,ZippedBufferPool pool)
 {
+    poolZippedBuffer = pool;
     rootDirectory = directory;
     QStringList resultat = directory.split("\\");
     for(int i =0;i<resultat.size()-1;i++)
@@ -19,12 +20,14 @@ Writer::Writer(QString directory)
 void Writer::writeCompressedFile()
 {
     QFile file(parentDirectory+"\\"+rootDirectoryName+".ecf");
-    QDataStream data;
-    for(std::list<ZippedBuffer>::iterator it = listeFiles.begin(); it != listeFiles.end(); it++)
+    QDataStream data(&file);
+    std::list<ZippedBuffer> listeZippedBuffer = poolZippedBuffer.listZippedBuffer;
+    for(std::list<ZippedBuffer>::iterator it = listeZippedBuffer.begin(); it != listeZippedBuffer.end(); it++)
     {
-        data.readRawData();
+        ZippedBuffer zipBuffer = ((ZippedBuffer)*it);
+        data << zipBuffer.name;
+        data << zipBuffer.compressedFile;
     }
-    file.write(data);
 }
 
 void Writer::writeUnCompressedFiles(){

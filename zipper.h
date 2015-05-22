@@ -7,7 +7,8 @@
 class Zipper : public QThread
 {
 public:
-    Zipper(QString directoryPath);
+    Zipper();
+    ZippedBuffer GetZippedBuffer(QString fileName);
     ~Zipper();
 };
 

@@ -13,18 +13,20 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        epsifilecompressor.cpp \
     filepool.cpp \
     zipper.cpp \
     zippedbuffer.cpp \
     writer.cpp \
-    zippedbufferpool.cpp
+    zippedbufferpool.cpp \
+    epsifilecompressor.cpp
 
-HEADERS  += epsifilecompressor.h \
+HEADERS  += \
     filepool.h \
     zipper.h \
     zippedbuffer.h \
     writer.h \
-    zippedbufferpool.h
+    zippedbufferpool.h \
+    epsifilecompressor.h
 
-FORMS    += epsifilecompressor.ui
+FORMS    += \
+    mainwindow.ui
